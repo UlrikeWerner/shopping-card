@@ -1,7 +1,12 @@
 import React, { useState } from "react";
 
-export default function ShoppingCard({ name, price }) {
-  const [shoppingCart, setShoppingCart] = useState([{ amount: 0, total: 0 }]);
+export default function ShoppingCard({
+  name,
+  price,
+  amount,
+  total,
+  updateCart,
+}) {
   return (
     <section>
       <h2>{name}</h2>
@@ -9,12 +14,17 @@ export default function ShoppingCard({ name, price }) {
       <button
         type="button"
         onClick={() => {
+          /*
           const cart = [...shoppingCart];
           cart[0].amount += 1;
           const p = cart[0].total + price;
           const result = Math.round(p * 100) / 100;
           cart[0].total = result;
-          setShoppingCart(cart);
+          setShoppingCart(cart);*/
+          const newAmount = amount + 1;
+          const newPrice = total + price;
+          const result = Math.round(newPrice * 100) / 100;
+          updateCart(newAmount, result);
         }}
       >
         +
@@ -22,6 +32,7 @@ export default function ShoppingCard({ name, price }) {
       <button
         type="button"
         onClick={() => {
+          /*
           const cart = [...shoppingCart];
           if (cart[0].amount > 0) {
             cart[0].amount -= 1;
@@ -29,13 +40,19 @@ export default function ShoppingCard({ name, price }) {
             const result = Math.round(p * 100) / 100;
             cart[0].total = result;
           }
-          setShoppingCart(cart);
+          setShoppingCart(cart);*/
+          if (amount > 0) {
+            const newAmount = amount - 1;
+            const newPrice = total - price;
+            const result = Math.round(newPrice * 100) / 100;
+            updateCart(newAmount, result);
+          }
         }}
       >
         -
       </button>
-      <p>amount: {shoppingCart[0].amount}</p>
-      <p>total: {shoppingCart[0].total}€</p>
+      <p>amount: {amount}</p>
+      <p>total: {total}€</p>
     </section>
   );
 }

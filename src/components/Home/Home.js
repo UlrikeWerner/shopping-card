@@ -12,9 +12,9 @@ export default function Home() {
       <h1>Shopping App</h1>
       <p>Items: ?</p>
       <p>Total Amount: ?</p>
-      <ShoppingCard name={items[0].name} price={items[0].price} />
-      <ShoppingCard name={items[1].name} price={items[1].price} />
-      <ShoppingCard name={items[2].name} price={items[2].price} />
+      {items.map((item) => {
+        return <ShoppingCard name={item.name} price={item.price} />;
+      })}
     </main>
   );
 }

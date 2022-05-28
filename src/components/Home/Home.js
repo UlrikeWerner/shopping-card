@@ -9,7 +9,8 @@ export default function Home() {
     { id: nanoid(), name: "Avocados", price: 1.9, amount: 0, total: 0 },
   ]);
 
-  const [wallet, setWallet] = useState(30);
+  const walletStartValue = 30;
+  const [wallet, setWallet] = useState(walletStartValue);
 
   function updateCart(index, newAmountValue, newTotalValue) {
     const cart = [...shoppingCart];

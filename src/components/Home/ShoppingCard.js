@@ -17,6 +17,7 @@ export default function ShoppingCard({
       <button
         type="button"
         onClick={() => {
+          updateWallet(wallet + price * amount);
           deleteItem(id);
         }}
       >

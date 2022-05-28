@@ -1,17 +1,27 @@
-import React, { useState } from "react";
+import React from "react";
 
 export default function ShoppingCard({
+  id,
   name,
   price,
   amount,
   total,
   updateCart,
+  deleteItem,
   wallet,
   updateWallet,
 }) {
   return (
     <section>
       <h2>{name}</h2>
+      <button
+        type="button"
+        onClick={() => {
+          deleteItem(id);
+        }}
+      >
+        X
+      </button>
       <p>{price}€ per piece</p>
       <button
         type="button"

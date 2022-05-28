@@ -1,11 +1,12 @@
 import React, { useState } from "react";
+import { nanoid } from "nanoid";
 import ShoppingCard from "./ShoppingCard.js";
 
 export default function Home() {
   const [shoppingCart, setShoppingCart] = useState([
-    { name: "Bananas", price: 0.5, amount: 0, total: 0 },
-    { name: "Apples", price: 0.6, amount: 0, total: 0 },
-    { name: "Avocados", price: 1.9, amount: 0, total: 0 },
+    { id: nanoid(), name: "Bananas", price: 0.5, amount: 0, total: 0 },
+    { id: nanoid(), name: "Apples", price: 0.6, amount: 0, total: 0 },
+    { id: nanoid(), name: "Avocados", price: 1.9, amount: 0, total: 0 },
   ]);
 
   const [wallet, setWallet] = useState(30);
@@ -35,6 +36,10 @@ export default function Home() {
     return counter;
   }
 
+  function deleteItem(id) {
+    setShoppingCart(shoppingCart.filter((item) => item.id !== id));
+  }
+
   return (
     <main>
       <h1>Shopping App</h1>
@@ -44,6 +49,8 @@ export default function Home() {
       {shoppingCart.map((item, index) => {
         return (
           <ShoppingCard
+            key={item.id}
+            id={item.id}
             name={item.name}
             price={item.price}
             amount={item.amount}
@@ -51,6 +58,7 @@ export default function Home() {
             updateCart={(newAmountValue, newTotalValue) =>
               updateCart(index, newAmountValue, newTotalValue)
             }
+            deleteItem={deleteItem}
             wallet={wallet}
             updateWallet={setWallet}
           />

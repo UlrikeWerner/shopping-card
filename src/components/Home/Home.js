@@ -9,8 +9,8 @@ export default function Home() {
     { id: nanoid(), name: "Avocados", price: 1.9, amount: 0, total: 0 },
   ]);
 
-  const walletStartValue = 30;
-  const [wallet, setWallet] = useState(walletStartValue);
+  const budgetStartValue = 30;
+  const [budget, setBudget] = useState(budgetStartValue);
 
   function updateCart(index, newAmountValue, newTotalValue) {
     const cart = [...shoppingCart];
@@ -45,8 +45,22 @@ export default function Home() {
     <main>
       <h1>Shopping App</h1>
       <p>{allItems()} Items</p>
-      <p>Total Price: {sumAllPrices()}€</p>
-      <p>Wallet: {wallet}€</p>
+      <p>
+        Total Price:{" "}
+        {sumAllPrices().toLocaleString(undefined, {
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2,
+        })}
+        €
+      </p>
+      <p>
+        Budget:{" "}
+        {budget.toLocaleString(undefined, {
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2,
+        })}
+        €
+      </p>
       {shoppingCart.map((item, index) => {
         return (
           <ShoppingCard
@@ -60,8 +74,8 @@ export default function Home() {
               updateCart(index, newAmountValue, newTotalValue)
             }
             deleteItem={deleteItem}
-            wallet={wallet}
-            updateWallet={setWallet}
+            budget={budget}
+            updateBudget={setBudget}
           />
         );
       })}

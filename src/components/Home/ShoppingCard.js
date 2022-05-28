@@ -8,32 +8,38 @@ export default function ShoppingCard({
   total,
   updateCart,
   deleteItem,
-  wallet,
-  updateWallet,
+  budget,
+  updateBudget,
 }) {
   return (
     <section>
-      <h2>{name}</h2>
       <button
         type="button"
         onClick={() => {
-          updateWallet(wallet + price * amount);
+          updateBudget(budget + price * amount);
           deleteItem(id);
         }}
       >
         X
       </button>
-      <p>{price}€ per piece</p>
+      <h2>{name}</h2>
+      <p>
+        {price.toLocaleString(undefined, {
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2,
+        })}
+        € each
+      </p>
       <button
         type="button"
         onClick={() => {
-          if (wallet >= price) {
+          if (budget >= price) {
             const newAmount = amount + 1;
             const newPrice = total + price;
             const result = Math.round(newPrice * 100) / 100;
             updateCart(newAmount, result);
-            const newWallet = wallet - price;
-            updateWallet(Math.round(newWallet * 100) / 100);
+            const newBudget = budget - price;
+            updateBudget(Math.round(newBudget * 100) / 100);
           }
         }}
       >
@@ -47,15 +53,22 @@ export default function ShoppingCard({
             const newPrice = total - price;
             const result = Math.round(newPrice * 100) / 100;
             updateCart(newAmount, result);
-            const newWallet = wallet + price;
-            updateWallet(Math.round(newWallet * 100) / 100);
+            const newBudget = budget + price;
+            updateBudget(Math.round(newBudget * 100) / 100);
           }
         }}
       >
         -
       </button>
       <p>amount: {amount}</p>
-      <p>total: {total}€</p>
+      <p>
+        total:{" "}
+        {total.toLocaleString(undefined, {
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2,
+        })}
+        €
+      </p>
     </section>
   );
 }

@@ -8,6 +8,8 @@ export default function Home() {
     { name: "Avocados", price: 1.9, amount: 0, total: 0 },
   ]);
 
+  const [wallet, setWallet] = useState(30);
+
   function updateCart(index, newAmountValue, newTotalValue) {
     const cart = [...shoppingCart];
     const item = { ...cart[index] };
@@ -24,6 +26,7 @@ export default function Home() {
     });
     return counter;
   }
+
   function sumAllPrices() {
     let counter = 0;
     shoppingCart.forEach((item) => {
@@ -35,8 +38,9 @@ export default function Home() {
   return (
     <main>
       <h1>Shopping App</h1>
-      <p>Items: {allItems()}</p>
-      <p>Total Amount: {sumAllPrices()}</p>
+      <p>{allItems()} Items</p>
+      <p>Total Price: {sumAllPrices()}€</p>
+      <p>Wallet: {wallet}€</p>
       {shoppingCart.map((item, index) => {
         return (
           <ShoppingCard
@@ -47,6 +51,8 @@ export default function Home() {
             updateCart={(newAmountValue, newTotalValue) =>
               updateCart(index, newAmountValue, newTotalValue)
             }
+            wallet={wallet}
+            updateWallet={setWallet}
           />
         );
       })}

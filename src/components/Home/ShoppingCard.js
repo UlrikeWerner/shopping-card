@@ -6,6 +6,8 @@ export default function ShoppingCard({
   amount,
   total,
   updateCart,
+  wallet,
+  updateWallet,
 }) {
   return (
     <section>
@@ -14,17 +16,14 @@ export default function ShoppingCard({
       <button
         type="button"
         onClick={() => {
-          /*
-          const cart = [...shoppingCart];
-          cart[0].amount += 1;
-          const p = cart[0].total + price;
-          const result = Math.round(p * 100) / 100;
-          cart[0].total = result;
-          setShoppingCart(cart);*/
-          const newAmount = amount + 1;
-          const newPrice = total + price;
-          const result = Math.round(newPrice * 100) / 100;
-          updateCart(newAmount, result);
+          if (wallet >= price) {
+            const newAmount = amount + 1;
+            const newPrice = total + price;
+            const result = Math.round(newPrice * 100) / 100;
+            updateCart(newAmount, result);
+            const newWallet = wallet - price;
+            updateWallet(Math.round(newWallet * 100) / 100);
+          }
         }}
       >
         +
@@ -32,20 +31,13 @@ export default function ShoppingCard({
       <button
         type="button"
         onClick={() => {
-          /*
-          const cart = [...shoppingCart];
-          if (cart[0].amount > 0) {
-            cart[0].amount -= 1;
-            const p = cart[0].total - price;
-            const result = Math.round(p * 100) / 100;
-            cart[0].total = result;
-          }
-          setShoppingCart(cart);*/
           if (amount > 0) {
             const newAmount = amount - 1;
             const newPrice = total - price;
             const result = Math.round(newPrice * 100) / 100;
             updateCart(newAmount, result);
+            const newWallet = wallet + price;
+            updateWallet(Math.round(newWallet * 100) / 100);
           }
         }}
       >

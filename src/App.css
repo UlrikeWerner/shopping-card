@@ -9,7 +9,7 @@ body {
   background-color: rgb(217, 244, 255);
   color: #06274f;
   margin: 0.3rem 0;
-  padding: 5rem 0.5rem 8rem;
+  padding: 6rem 0.5rem 8rem;
 }
 
 header {
@@ -20,4 +20,8 @@ header {
   left: 0;
   right: 0;
   top: 0;
+}
+
+p {
+  margin: 0;
 }

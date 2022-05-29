@@ -52,6 +52,8 @@ export default function ShoppingCard({
             updateCart(newAmount, result);
             const newBudget = budget - price;
             updateBudget(Math.round(newBudget * 100) / 100);
+          } else {
+            alert("Your budget is too low!");
           }
         }}
       >

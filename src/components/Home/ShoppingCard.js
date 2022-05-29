@@ -15,6 +15,7 @@ export default function ShoppingCard({
   return (
     <section>
       <button
+        className="btn-delete"
         type="button"
         onClick={() => {
           updateBudget(budget + price * amount);
@@ -24,14 +25,24 @@ export default function ShoppingCard({
         X
       </button>
       <h2>{name}</h2>
-      <p>
+      <p className="price">
         {price.toLocaleString(undefined, {
           minimumFractionDigits: 2,
           maximumFractionDigits: 2,
         })}
         € each
       </p>
+      <p className="amount">amount: {amount}</p>
+      <p className="total-price">
+        total:{" "}
+        {total.toLocaleString(undefined, {
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2,
+        })}
+        €
+      </p>
       <button
+        className="btn-plus"
         type="button"
         onClick={() => {
           if (budget >= price) {
@@ -47,6 +58,7 @@ export default function ShoppingCard({
         +
       </button>
       <button
+        className="btn-minus"
         type="button"
         onClick={() => {
           if (amount > 0) {
@@ -61,15 +73,6 @@ export default function ShoppingCard({
       >
         -
       </button>
-      <p>amount: {amount}</p>
-      <p>
-        total:{" "}
-        {total.toLocaleString(undefined, {
-          minimumFractionDigits: 2,
-          maximumFractionDigits: 2,
-        })}
-        €
-      </p>
     </section>
   );
 }

@@ -67,18 +67,18 @@ export default function Home() {
         })}
       </main>
       <footer>
-        <p>{allItems()} Items</p>
-        <p>
-          Total Price:{" "}
-          {sumAllPrices().toLocaleString(undefined, {
+        <p className="footer__budget">
+          Budget:{" "}
+          {budget.toLocaleString(undefined, {
             minimumFractionDigits: 2,
             maximumFractionDigits: 2,
           })}
           €
         </p>
-        <p>
-          Budget:{" "}
-          {budget.toLocaleString(undefined, {
+        <p className="footer__items">{allItems()} Items</p>
+        <p className="footer__total-price">
+          Total Price:{" "}
+          {sumAllPrices().toLocaleString(undefined, {
             minimumFractionDigits: 2,
             maximumFractionDigits: 2,
           })}

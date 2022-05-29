@@ -2,7 +2,7 @@
   display: grid;
   grid-template-columns: 1fr 6fr 4fr 1fr;
   grid-template-rows: 1fr 1fr;
-  border: 2px solid rgb(6, 39, 79);
+  border: 2px solid var(--color-darkblue);
   border-radius: 0.25rem;
   margin-bottom: 0.5rem;
   padding: 0.25rem;
@@ -12,6 +12,7 @@
   grid-area: 1 / 1 / 2 / 2;
   align-self: center;
   margin-right: 0.5rem;
+  font-size: 0.6rem;
 }
 
 .card__item-name {
@@ -39,9 +40,11 @@
 .card__btn-plus {
   grid-area: 1 / 4 / 2 / 5;
   align-self: center;
+  font-size: 0.6rem;
 }
 
 .card__btn-minus {
   grid-area: 2 / 4 / 3 / 5;
   align-self: center;
+  font-size: 0.6rem;
 }

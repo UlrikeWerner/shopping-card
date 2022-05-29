@@ -11,8 +11,8 @@ footer {
 
   padding: 0.5rem;
   padding-left: 1rem;
-  background-color: #06274f;
-  color: rgb(217, 244, 255);
+  background-color: var(--color-darkblue);
+  color: var(--color-lightblue);
 }
 
 .footer__budget {

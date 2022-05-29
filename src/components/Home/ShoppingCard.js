@@ -22,7 +22,7 @@ export default function ShoppingCard({
           deleteItem(id);
         }}
       >
-        X
+        &#10060;
       </button>
       <h2 className="card__item-name">{name}</h2>
       <p className="card__price">
@@ -55,7 +55,7 @@ export default function ShoppingCard({
           }
         }}
       >
-        +
+        &#10133;
       </button>
       <button
         className="card__btn-minus"
@@ -71,7 +71,7 @@ export default function ShoppingCard({
           }
         }}
       >
-        -
+        &#10134;
       </button>
     </section>
   );

@@ -1,4 +1,5 @@
 import React from "react";
+import "./ShoppingCard.css";
 
 export default function ShoppingCard({
   id,
@@ -12,8 +13,9 @@ export default function ShoppingCard({
   updateBudget,
 }) {
   return (
-    <section>
+    <section className="card">
       <button
+        className="card__btn-delete"
         type="button"
         onClick={() => {
           updateBudget(budget + price * amount);
@@ -22,15 +24,25 @@ export default function ShoppingCard({
       >
         X
       </button>
-      <h2>{name}</h2>
-      <p>
+      <h2 className="card__item-name">{name}</h2>
+      <p className="card__price">
         {price.toLocaleString(undefined, {
           minimumFractionDigits: 2,
           maximumFractionDigits: 2,
         })}
         € each
       </p>
+      <p className="card__amount">amount: {amount}</p>
+      <p className="card__total-price">
+        total:{" "}
+        {total.toLocaleString(undefined, {
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2,
+        })}
+        €
+      </p>
       <button
+        className="card__btn-plus"
         type="button"
         onClick={() => {
           if (budget >= price) {
@@ -46,6 +58,7 @@ export default function ShoppingCard({
         +
       </button>
       <button
+        className="card__btn-minus"
         type="button"
         onClick={() => {
           if (amount > 0) {
@@ -60,15 +73,6 @@ export default function ShoppingCard({
       >
         -
       </button>
-      <p>amount: {amount}</p>
-      <p>
-        total:{" "}
-        {total.toLocaleString(undefined, {
-          minimumFractionDigits: 2,
-          maximumFractionDigits: 2,
-        })}
-        €
-      </p>
     </section>
   );
 }

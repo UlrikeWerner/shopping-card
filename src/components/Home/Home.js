@@ -42,43 +42,49 @@ export default function Home() {
   }
 
   return (
-    <main>
-      <h1>Shopping App</h1>
-      <p>{allItems()} Items</p>
-      <p>
-        Total Price:{" "}
-        {sumAllPrices().toLocaleString(undefined, {
-          minimumFractionDigits: 2,
-          maximumFractionDigits: 2,
+    <>
+      <header>
+        <h1>Shopping App</h1>
+      </header>
+      <main>
+        {shoppingCart.map((item, index) => {
+          return (
+            <ShoppingCard
+              key={item.id}
+              id={item.id}
+              name={item.name}
+              price={item.price}
+              amount={item.amount}
+              total={item.total}
+              updateCart={(newAmountValue, newTotalValue) =>
+                updateCart(index, newAmountValue, newTotalValue)
+              }
+              deleteItem={deleteItem}
+              budget={budget}
+              updateBudget={setBudget}
+            />
+          );
         })}
-        €
-      </p>
-      <p>
-        Budget:{" "}
-        {budget.toLocaleString(undefined, {
-          minimumFractionDigits: 2,
-          maximumFractionDigits: 2,
-        })}
-        €
-      </p>
-      {shoppingCart.map((item, index) => {
-        return (
-          <ShoppingCard
-            key={item.id}
-            id={item.id}
-            name={item.name}
-            price={item.price}
-            amount={item.amount}
-            total={item.total}
-            updateCart={(newAmountValue, newTotalValue) =>
-              updateCart(index, newAmountValue, newTotalValue)
-            }
-            deleteItem={deleteItem}
-            budget={budget}
-            updateBudget={setBudget}
-          />
-        );
-      })}
-    </main>
+      </main>
+      <footer>
+        <p className="footer__budget">
+          Budget:{" "}
+          {budget.toLocaleString(undefined, {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+          })}
+          €
+        </p>
+        <p className="footer__items">{allItems()} Items</p>
+        <p className="footer__total-price">
+          Total Price:{" "}
+          {sumAllPrices().toLocaleString(undefined, {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+          })}
+          €
+        </p>
+      </footer>
+    </>
   );
 }

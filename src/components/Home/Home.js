@@ -1,9 +1,20 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { nanoid } from "nanoid";
 import ShoppingCard from "./ShoppingCard.js";
 
 export default function Home() {
-  const [shoppingCart, setShoppingCart] = useState([]);
+  const [shoppingCart, setShoppingCart] = useState(() => {
+    const cart = localStorage.getItem("shopCart");
+    if (cart) {
+      return JSON.parse(cart);
+    } else {
+      return [];
+    }
+  });
+
+  useEffect(() => {
+    localStorage.setItem("shopCart", JSON.stringify(shoppingCart));
+  }, [shoppingCart]);
 
   const budgetStartValue = 30;
   const [budget, setBudget] = useState(budgetStartValue);
@@ -11,12 +22,15 @@ export default function Home() {
   const [itemNameInputValue, setItemNameInputValue] = useState("");
   const [itemPriceInputValue, setItemPriceInputValue] = useState("");
 
-  function updateCart(index, newAmountValue, newTotalValue) {
-    const cart = [...shoppingCart];
-    const item = { ...cart[index] };
-    item.amount = newAmountValue;
-    item.total = newTotalValue;
-    cart[index] = item;
+  function updateCart(id, newAmountValue, newTotalValue) {
+    const cart = shoppingCart.map((item) => {
+      if (item.id === id) {
+        console.log(item);
+        return { ...item, amount: newAmountValue, total: newTotalValue };
+      } else {
+        return item;
+      }
+    });
     setShoppingCart(cart);
   }
 
@@ -80,14 +94,10 @@ export default function Home() {
             setItemPriceInputValue("");
           }}
         >
-          <label
-            className="form__item-name-label form__label"
-            for="itemNameInput"
-          >
+          <label className="form__item-name-label form__label">
             item
             <input
               className="form__item-name-input form__input"
-              id="itemNameInput"
               required
               type="text"
               value={itemNameInputValue}
@@ -96,14 +106,10 @@ export default function Home() {
               }}
             />
           </label>
-          <label
-            className="form__item-price-label form__label"
-            for="itemPriceInput"
-          >
+          <label className="form__item-price-label form__label">
             price
             <input
               className="form__item-price-input form__input"
-              id="itemPriceInput"
               required
               type="text"
               value={itemPriceInputValue}
@@ -122,7 +128,7 @@ export default function Home() {
           .sort((a, b) => {
             return a.name < b.name ? -1 : 1;
           })
-          .map((item, index) => {
+          .map((item) => {
             return (
               <ShoppingCard
                 key={item.id}
@@ -131,9 +137,7 @@ export default function Home() {
                 price={item.price}
                 amount={item.amount}
                 total={item.total}
-                updateCart={(newAmountValue, newTotalValue) =>
-                  updateCart(index, newAmountValue, newTotalValue)
-                }
+                updateCart={updateCart}
                 deleteItem={deleteItem}
                 budget={budget}
                 updateBudget={setBudget}

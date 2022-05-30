@@ -49,7 +49,7 @@ export default function ShoppingCard({
             const newAmount = amount + 1;
             const newPrice = total + price;
             const result = Math.round(newPrice * 100) / 100;
-            updateCart(newAmount, result);
+            updateCart(id, newAmount, result);
             const newBudget = budget - price;
             updateBudget(Math.round(newBudget * 100) / 100);
           } else {
@@ -67,7 +67,7 @@ export default function ShoppingCard({
             const newAmount = amount - 1;
             const newPrice = total - price;
             const result = Math.round(newPrice * 100) / 100;
-            updateCart(newAmount, result);
+            updateCart(id, newAmount, result);
             const newBudget = budget + price;
             updateBudget(Math.round(newBudget * 100) / 100);
           }

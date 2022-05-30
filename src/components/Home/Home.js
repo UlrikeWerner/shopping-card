@@ -68,7 +68,9 @@ export default function Home() {
             if (price <= budget) {
               let insert = true;
               shoppingCart.forEach((card) => {
-                if (card.name === itemNameInputValue.toLowerCase()) {
+                if (
+                  card.name.toLowerCase() === itemNameInputValue.toLowerCase()
+                ) {
                   insert = false;
                 }
               });
@@ -77,7 +79,7 @@ export default function Home() {
                 setShoppingCart([
                   {
                     id: nanoid(),
-                    name: itemNameInputValue.toLowerCase(),
+                    name: itemNameInputValue,
                     price: price,
                     amount: 1,
                     total: price,
@@ -100,7 +102,7 @@ export default function Home() {
               className="form__item-name-input form__input"
               required
               type="text"
-              value={itemNameInputValue.toLowerCase()}
+              value={itemNameInputValue}
               onChange={(event) => {
                 setItemNameInputValue(event.target.value);
               }}

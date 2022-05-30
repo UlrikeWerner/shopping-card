@@ -52,17 +52,27 @@ export default function Home() {
               itemPriceInputValue.replace(",", ".").replace(" ", "")
             );
             if (price <= budget) {
-              setBudget(budget - price);
-              setShoppingCart([
-                {
-                  id: nanoid(),
-                  name: itemNameInputValue,
-                  price: price,
-                  amount: 1,
-                  total: price,
-                },
-                ...shoppingCart,
-              ]);
+              let insert = true;
+              shoppingCart.forEach((card) => {
+                if (card.name === itemNameInputValue) {
+                  insert = false;
+                }
+              });
+              if (insert) {
+                setBudget(budget - price);
+                setShoppingCart([
+                  {
+                    id: nanoid(),
+                    name: itemNameInputValue,
+                    price: price,
+                    amount: 1,
+                    total: price,
+                  },
+                  ...shoppingCart,
+                ]);
+              } else {
+                alert("You have already " + itemNameInputValue);
+              }
             } else {
               alert("Your budget is too low!");
             }
